@@ -30,10 +30,10 @@ export const usePromptAndCommand = () => {
   } = useContext(ChatbotUIContext)
 
   const handleInputChange = (value: string) => {
-    const atTextRegex = /@([^ ]*)$/
-    const slashTextRegex = /\/([^ ]*)$/
-    const hashtagTextRegex = /#([^ ]*)$/
-    const toolTextRegex = /!([^ ]*)$/
+    const atTextRegex = /\/@([^ ]*)$/
+    const slashTextRegex = /\/\/([^ ]*)$/
+    const hashtagTextRegex = /\/#([^ ]*)$/
+    const toolTextRegex = /\/!([^ ]*)$/
     const atMatch = value.match(atTextRegex)
     const slashMatch = value.match(slashTextRegex)
     const hashtagMatch = value.match(hashtagTextRegex)
@@ -67,7 +67,7 @@ export const usePromptAndCommand = () => {
 
   const handleSelectPrompt = (prompt: Tables<"prompts">) => {
     setIsPromptPickerOpen(false)
-    setUserInput(userInput.replace(/\/[^ ]*$/, "") + prompt.content)
+    setUserInput(userInput.replace(/\/\/[^ ]*$/, "") + prompt.content)
   }
 
   const handleSelectUserFile = async (file: Tables<"files">) => {
@@ -94,7 +94,7 @@ export const usePromptAndCommand = () => {
       return prev
     })
 
-    setUserInput(userInput.replace(/#[^ ]*$/, ""))
+    setUserInput(userInput.replace(/\/#[^ ]*$/, ""))
   }
 
   const handleSelectUserCollection = async (
@@ -125,18 +125,18 @@ export const usePromptAndCommand = () => {
       return [...prev, ...newFiles]
     })
 
-    setUserInput(userInput.replace(/#[^ ]*$/, ""))
+    setUserInput(userInput.replace(/\/#[^ ]*$/, ""))
   }
 
   const handleSelectTool = (tool: Tables<"tools">) => {
     setIsToolPickerOpen(false)
-    setUserInput(userInput.replace(/![^ ]*$/, ""))
+    setUserInput(userInput.replace(/\/![^ ]*$/, ""))
     setSelectedTools(prev => [...prev, tool])
   }
 
   const handleSelectAssistant = async (assistant: Tables<"assistants">) => {
     setIsAssistantPickerOpen(false)
-    setUserInput(userInput.replace(/@[^ ]*$/, ""))
+    setUserInput(userInput.replace(/\/@[^ ]*$/, ""))
     setSelectedAssistant(assistant)
 
     setChatSettings({

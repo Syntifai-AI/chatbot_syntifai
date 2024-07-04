@@ -88,14 +88,8 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
   const [azureOpenaiEndpoint, setAzureOpenaiEndpoint] = useState(
     profile?.azure_openai_endpoint || ""
   )
-  const [azureOpenai35TurboID, setAzureOpenai35TurboID] = useState(
-    profile?.azure_openai_35_turbo_id || ""
-  )
-  const [azureOpenai45TurboID, setAzureOpenai45TurboID] = useState(
-    profile?.azure_openai_45_turbo_id || ""
-  )
-  const [azureOpenai45VisionID, setAzureOpenai45VisionID] = useState(
-    profile?.azure_openai_45_vision_id || ""
+  const [azureOpenai4OID, setAzureOpenai4OID] = useState(
+    profile?.azure_openai_4_o_id || ""
   )
   const [azureEmbeddingsID, setAzureEmbeddingsID] = useState(
     profile?.azure_openai_embeddings_id || ""
@@ -117,6 +111,8 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
   const [openrouterAPIKey, setOpenrouterAPIKey] = useState(
     profile?.openrouter_api_key || ""
   )
+
+  const [flowiseAPIKey, setFlowiseAPIKey] = useState(profile?.flowise_api_key || ""); // Adiciona esta linha
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -153,11 +149,10 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
       use_azure_openai: useAzureOpenai,
       azure_openai_api_key: azureOpenaiAPIKey,
       azure_openai_endpoint: azureOpenaiEndpoint,
-      azure_openai_35_turbo_id: azureOpenai35TurboID,
-      azure_openai_45_turbo_id: azureOpenai45TurboID,
-      azure_openai_45_vision_id: azureOpenai45VisionID,
+      azure_openai_4_o_id: azureOpenai4OID,
       azure_openai_embeddings_id: azureEmbeddingsID,
-      openrouter_api_key: openrouterAPIKey
+      openrouter_api_key: openrouterAPIKey,
+      flowise_api_key: flowiseAPIKey // Adiciona esta linha
     })
 
     setProfile(updatedProfile)
@@ -172,7 +167,8 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
       "mistral",
       "groq",
       "perplexity",
-      "openrouter"
+      "openrouter",
+      "flowise" // Adiciona esta linha
     ]
 
     providers.forEach(async provider => {
@@ -515,63 +511,19 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
 
                     {
                       <div className="space-y-1">
-                        {envKeyMap["azure_gpt_35_turbo_name"] ? (
+                        {envKeyMap["azure_gpt_4_o_name"] ? (
                           <Label className="text-xs">
-                            Azure GPT-3.5 Turbo deployment name set by admin.
+                            Azure GPT-4 O deployment name set by admin.
                           </Label>
                         ) : (
                           <>
-                            <Label>Azure GPT-3.5 Turbo Deployment Name</Label>
+                            <Label>Azure GPT-4 O Deployment Name</Label>
 
                             <Input
-                              placeholder="Azure GPT-3.5 Turbo Deployment Name"
-                              value={azureOpenai35TurboID}
+                              placeholder="Azure GPT-4 O Deployment Name"
+                              value={azureOpenai4OID}
                               onChange={e =>
-                                setAzureOpenai35TurboID(e.target.value)
-                              }
-                            />
-                          </>
-                        )}
-                      </div>
-                    }
-
-                    {
-                      <div className="space-y-1">
-                        {envKeyMap["azure_gpt_45_turbo_name"] ? (
-                          <Label className="text-xs">
-                            Azure GPT-4.5 Turbo deployment name set by admin.
-                          </Label>
-                        ) : (
-                          <>
-                            <Label>Azure GPT-4.5 Turbo Deployment Name</Label>
-
-                            <Input
-                              placeholder="Azure GPT-4.5 Turbo Deployment Name"
-                              value={azureOpenai45TurboID}
-                              onChange={e =>
-                                setAzureOpenai45TurboID(e.target.value)
-                              }
-                            />
-                          </>
-                        )}
-                      </div>
-                    }
-
-                    {
-                      <div className="space-y-1">
-                        {envKeyMap["azure_gpt_45_vision_name"] ? (
-                          <Label className="text-xs">
-                            Azure GPT-4.5 Vision deployment name set by admin.
-                          </Label>
-                        ) : (
-                          <>
-                            <Label>Azure GPT-4.5 Vision Deployment Name</Label>
-
-                            <Input
-                              placeholder="Azure GPT-4.5 Vision Deployment Name"
-                              value={azureOpenai45VisionID}
-                              onChange={e =>
-                                setAzureOpenai45VisionID(e.target.value)
+                                setAzureOpenai4OID(e.target.value)
                               }
                             />
                           </>
@@ -723,6 +675,22 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                   </>
                 )}
               </div>
+
+              <div className="space-y-1">
+                {envKeyMap["flowise"] ? (
+                  <Label>Flowise API key set by admin.</Label> // Adiciona esta linha
+                ) : (
+                  <>
+                    <Label>Flowise API Key</Label> // Adiciona esta linha
+                    <Input
+                      placeholder="Flowise API Key"
+                      type="password"
+                      value={flowiseAPIKey}
+                      onChange={e => setFlowiseAPIKey(e.target.value)}
+                    />
+                  </>
+                )}
+              </div>
             </TabsContent>
           </Tabs>
         </div>
@@ -734,7 +702,7 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
             <WithTooltip
               display={
                 <div>
-                  Download Chatbot UI 1.0 data as JSON. Import coming soon!
+                  Download Chat Syntifai 1.0 data as JSON. Import coming soon!
                 </div>
               }
               trigger={

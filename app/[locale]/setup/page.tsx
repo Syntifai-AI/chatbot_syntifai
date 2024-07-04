@@ -50,9 +50,7 @@ export default function SetupPage() {
   const [openaiOrgID, setOpenaiOrgID] = useState("")
   const [azureOpenaiAPIKey, setAzureOpenaiAPIKey] = useState("")
   const [azureOpenaiEndpoint, setAzureOpenaiEndpoint] = useState("")
-  const [azureOpenai35TurboID, setAzureOpenai35TurboID] = useState("")
-  const [azureOpenai45TurboID, setAzureOpenai45TurboID] = useState("")
-  const [azureOpenai45VisionID, setAzureOpenai45VisionID] = useState("")
+  const [azureOpenai4OID, setAzureOpenai4OID] = useState("")
   const [azureOpenaiEmbeddingsID, setAzureOpenaiEmbeddingsID] = useState("")
   const [anthropicAPIKey, setAnthropicAPIKey] = useState("")
   const [googleGeminiAPIKey, setGoogleGeminiAPIKey] = useState("")
@@ -60,6 +58,7 @@ export default function SetupPage() {
   const [groqAPIKey, setGroqAPIKey] = useState("")
   const [perplexityAPIKey, setPerplexityAPIKey] = useState("")
   const [openrouterAPIKey, setOpenrouterAPIKey] = useState("")
+  const [flowiseAPIKey, setFlowiseAPIKey] = useState(""); // Novo estado
 
   useEffect(() => {
     ;(async () => {
@@ -133,12 +132,11 @@ export default function SetupPage() {
       groq_api_key: groqAPIKey,
       perplexity_api_key: perplexityAPIKey,
       openrouter_api_key: openrouterAPIKey,
+      flowise_api_key: flowiseAPIKey, // Novo campo
       use_azure_openai: useAzureOpenai,
       azure_openai_api_key: azureOpenaiAPIKey,
       azure_openai_endpoint: azureOpenaiEndpoint,
-      azure_openai_35_turbo_id: azureOpenai35TurboID,
-      azure_openai_45_turbo_id: azureOpenai45TurboID,
-      azure_openai_45_vision_id: azureOpenai45VisionID,
+      azure_openai_4_o_id: azureOpenai4OID,
       azure_openai_embeddings_id: azureOpenaiEmbeddingsID
     }
 
@@ -163,7 +161,7 @@ export default function SetupPage() {
           <StepContainer
             stepDescription="Let's create your profile."
             stepNum={currentStep}
-            stepTitle="Welcome to Chatbot UI"
+            stepTitle="Welcome to Chat Syntifai"
             onShouldProceed={handleShouldProceed}
             showNextButton={!!(username && usernameAvailable)}
             showBackButton={false}
@@ -195,23 +193,20 @@ export default function SetupPage() {
               openaiOrgID={openaiOrgID}
               azureOpenaiAPIKey={azureOpenaiAPIKey}
               azureOpenaiEndpoint={azureOpenaiEndpoint}
-              azureOpenai35TurboID={azureOpenai35TurboID}
-              azureOpenai45TurboID={azureOpenai45TurboID}
-              azureOpenai45VisionID={azureOpenai45VisionID}
+              azureOpenai4OID={azureOpenai4OID}
               azureOpenaiEmbeddingsID={azureOpenaiEmbeddingsID}
               anthropicAPIKey={anthropicAPIKey}
               googleGeminiAPIKey={googleGeminiAPIKey}
               mistralAPIKey={mistralAPIKey}
               groqAPIKey={groqAPIKey}
               perplexityAPIKey={perplexityAPIKey}
+              flowiseAPIKey={flowiseAPIKey} // Novo campo
               useAzureOpenai={useAzureOpenai}
               onOpenaiAPIKeyChange={setOpenaiAPIKey}
               onOpenaiOrgIDChange={setOpenaiOrgID}
               onAzureOpenaiAPIKeyChange={setAzureOpenaiAPIKey}
               onAzureOpenaiEndpointChange={setAzureOpenaiEndpoint}
-              onAzureOpenai35TurboIDChange={setAzureOpenai35TurboID}
-              onAzureOpenai45TurboIDChange={setAzureOpenai45TurboID}
-              onAzureOpenai45VisionIDChange={setAzureOpenai45VisionID}
+              onAzureOpenai4OIDChange={setAzureOpenai4OID}
               onAzureOpenaiEmbeddingsIDChange={setAzureOpenaiEmbeddingsID}
               onAnthropicAPIKeyChange={setAnthropicAPIKey}
               onGoogleGeminiAPIKeyChange={setGoogleGeminiAPIKey}
@@ -221,6 +216,7 @@ export default function SetupPage() {
               onUseAzureOpenaiChange={setUseAzureOpenai}
               openrouterAPIKey={openrouterAPIKey}
               onOpenrouterAPIKeyChange={setOpenrouterAPIKey}
+              onFlowiseAPIKeyChange={setFlowiseAPIKey} // Novo campo
             />
           </StepContainer>
         )

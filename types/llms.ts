@@ -7,6 +7,7 @@ export type LLMID =
   | MistralLLMID
   | GroqLLMID
   | PerplexityLLMID
+  | "flowise" // Adicionando Flowise
 
 // OpenAI Models (UPDATED 5/13/24)
 export type OpenAILLMID =

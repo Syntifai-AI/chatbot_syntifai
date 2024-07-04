@@ -63,30 +63,30 @@ BEGIN
     random_username := 'user' || substr(replace(gen_random_uuid()::text, '-', ''), 1, 16);
 
     -- Create a profile for the new user
-    INSERT INTO public.profiles(user_id, anthropic_api_key, azure_openai_35_turbo_id, azure_openai_45_turbo_id, azure_openai_45_vision_id, azure_openai_api_key, azure_openai_endpoint, google_gemini_api_key, has_onboarded, image_url, image_path, mistral_api_key, display_name, bio, openai_api_key, openai_organization_id, perplexity_api_key, profile_context, use_azure_openai, username)
+    INSERT INTO public.profiles(user_id, bio, has_onboarded, image_url, image_path, profile_context, display_name, use_azure_openai, username, flowise_api_key, anthropic_api_key, azure_openai_4_o_id, azure_openai_api_key, azure_openai_endpoint, google_gemini_api_key, mistral_api_key, openai_api_key, openai_organization_id, perplexity_api_key)
     VALUES(
         NEW.id,
         '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
         FALSE,
         '',
         '',
         '',
         '',
-        '',
-        '',
-        '',
-        '',
-        '',
         FALSE,
-        random_username
+        random_username,
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
     );
 
+    -- Create the home workspace for the new user
     INSERT INTO public.workspaces(user_id, is_home, name, default_context_length, default_model, default_prompt, default_temperature, description, embeddings_provider, include_profile_context, include_workspace_instructions, instructions)
     VALUES(
         NEW.id,

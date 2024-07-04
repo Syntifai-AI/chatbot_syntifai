@@ -10,6 +10,8 @@ export async function POST(request: Request) {
   const json = await request.json()
   const { chatSettings, messages } = json as ChatAPIPayload
 
+  console.log("Received request:", json)
+
   try {
     const profile = await getServerProfile()
 
@@ -18,16 +20,10 @@ export async function POST(request: Request) {
     const ENDPOINT = profile.azure_openai_endpoint
     const KEY = profile.azure_openai_api_key
 
-    let DEPLOYMENT_ID = ""
+    let DEPLOYMENT_ID: string = ""
     switch (chatSettings.model) {
-      case "gpt-3.5-turbo":
-        DEPLOYMENT_ID = profile.azure_openai_35_turbo_id || ""
-        break
-      case "gpt-4-turbo-preview":
-        DEPLOYMENT_ID = profile.azure_openai_45_turbo_id || ""
-        break
-      case "gpt-4-vision-preview":
-        DEPLOYMENT_ID = profile.azure_openai_45_vision_id || ""
+      case "gpt-4o":
+        DEPLOYMENT_ID = profile.azure_openai_4_o_id || ""
         break
       default:
         return new Response(JSON.stringify({ message: "Model not found" }), {
@@ -51,13 +47,21 @@ export async function POST(request: Request) {
       defaultHeaders: { "api-key": KEY }
     })
 
+    console.log("Sending request to Azure OpenAI:", {
+      model: DEPLOYMENT_ID,
+      messages: messages,
+      temperature: chatSettings.temperature
+    })
+
     const response = await azureOpenai.chat.completions.create({
       model: DEPLOYMENT_ID as ChatCompletionCreateParamsBase["model"],
       messages: messages as ChatCompletionCreateParamsBase["messages"],
       temperature: chatSettings.temperature,
-      max_tokens: chatSettings.model === "gpt-4-vision-preview" ? 4096 : null, // TODO: Fix
+      max_tokens: null, // Ajuste aqui se necessário
       stream: true
     })
+
+    console.log("Received response from Azure OpenAI:", response)
 
     const stream = OpenAIStream(response)
 
@@ -65,6 +69,7 @@ export async function POST(request: Request) {
   } catch (error: any) {
     const errorMessage = error.error?.message || "An unexpected error occurred"
     const errorCode = error.status || 500
+    console.error("Error during Azure OpenAI request:", error)
     return new Response(JSON.stringify({ message: errorMessage }), {
       status: errorCode
     })

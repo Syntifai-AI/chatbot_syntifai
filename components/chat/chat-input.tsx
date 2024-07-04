@@ -4,9 +4,9 @@ import { LLM_LIST } from "@/lib/models/llm/llm-list"
 import { cn } from "@/lib/utils"
 import {
   IconBolt,
-  IconCirclePlus,
+  IconPaperclip,
   IconPlayerStopFilled,
-  IconSend
+  IconArrowUp
 } from "@tabler/icons-react"
 import Image from "next/image"
 import { FC, useContext, useEffect, useRef, useState } from "react"
@@ -211,13 +211,13 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
         )}
       </div>
 
-      <div className="border-input relative mt-3 flex min-h-[60px] w-full items-center justify-center rounded-xl border-2">
+      <div className="border-input relative -mt-4 flex min-h-[60px] w-full items-center justify-center rounded-3xl border-2">
         <div className="absolute bottom-[76px] left-0 max-h-[300px] w-full overflow-auto rounded-xl dark:border-none">
           <ChatCommandInput />
         </div>
 
         <>
-          <IconCirclePlus
+          <IconPaperclip
             className="absolute bottom-[12px] left-3 cursor-pointer p-1 hover:opacity-50"
             size={32}
             onClick={() => fileInputRef.current?.click()}
@@ -241,7 +241,7 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
           className="ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring text-md flex w-full resize-none rounded-md border-none bg-transparent px-14 py-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
           placeholder={t(
             // `Ask anything. Type "@" for assistants, "/" for prompts, "#" for files, and "!" for tools.`
-            `Ask anything. Type @  /  #  !`
+            `Mensagem Syntia`
           )}
           onValueChange={handleInputChange}
           value={userInput}
@@ -261,7 +261,7 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
               size={30}
             />
           ) : (
-            <IconSend
+            <IconArrowUp
               className={cn(
                 "bg-primary text-secondary rounded p-1",
                 !userInput && "cursor-not-allowed opacity-50"

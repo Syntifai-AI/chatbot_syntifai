@@ -13,13 +13,12 @@ export async function GET() {
     groq: VALID_ENV_KEYS.GROQ_API_KEY,
     perplexity: VALID_ENV_KEYS.PERPLEXITY_API_KEY,
     openrouter: VALID_ENV_KEYS.OPENROUTER_API_KEY,
+    flowise: VALID_ENV_KEYS.FLOWISE_API_KEY, // Adicionando a chave de API "flowise"
 
     openai_organization_id: VALID_ENV_KEYS.OPENAI_ORGANIZATION_ID,
 
     azure_openai_endpoint: VALID_ENV_KEYS.AZURE_OPENAI_ENDPOINT,
-    azure_gpt_35_turbo_name: VALID_ENV_KEYS.AZURE_GPT_35_TURBO_NAME,
-    azure_gpt_45_vision_name: VALID_ENV_KEYS.AZURE_GPT_45_VISION_NAME,
-    azure_gpt_45_turbo_name: VALID_ENV_KEYS.AZURE_GPT_45_TURBO_NAME,
+    azure_gpt_4_o_name: VALID_ENV_KEYS.AZURE_GPT_4_O_NAME,
     azure_embeddings_name: VALID_ENV_KEYS.AZURE_EMBEDDINGS_NAME
   }
 

@@ -6,3 +6,4 @@ export type EnvKey =
   | "GROQ_API_KEY"
   | "PERPLEXITY_API_KEY"
   | "AZURE_OPENAI_API_KEY"
+  | "FLOWISE_API_KEY" // Adiciona o Flowise API Key

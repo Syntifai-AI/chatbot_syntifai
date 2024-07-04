@@ -8,9 +8,7 @@ interface APIStepProps {
   openaiOrgID: string
   azureOpenaiAPIKey: string
   azureOpenaiEndpoint: string
-  azureOpenai35TurboID: string
-  azureOpenai45TurboID: string
-  azureOpenai45VisionID: string
+  azureOpenai4OID: string
   azureOpenaiEmbeddingsID: string
   anthropicAPIKey: string
   googleGeminiAPIKey: string
@@ -19,20 +17,20 @@ interface APIStepProps {
   perplexityAPIKey: string
   useAzureOpenai: boolean
   openrouterAPIKey: string
+  flowiseAPIKey: string // Adiciona esta linha
   onOpenrouterAPIKeyChange: (value: string) => void
   onOpenaiAPIKeyChange: (value: string) => void
   onOpenaiOrgIDChange: (value: string) => void
   onAzureOpenaiAPIKeyChange: (value: string) => void
   onAzureOpenaiEndpointChange: (value: string) => void
-  onAzureOpenai35TurboIDChange: (value: string) => void
-  onAzureOpenai45TurboIDChange: (value: string) => void
-  onAzureOpenai45VisionIDChange: (value: string) => void
+  onAzureOpenai4OIDChange: (value: string) => void
   onAzureOpenaiEmbeddingsIDChange: (value: string) => void
   onAnthropicAPIKeyChange: (value: string) => void
   onGoogleGeminiAPIKeyChange: (value: string) => void
   onMistralAPIKeyChange: (value: string) => void
   onGroqAPIKeyChange: (value: string) => void
   onPerplexityAPIKeyChange: (value: string) => void
+  onFlowiseAPIKeyChange: (value: string) => void // Adiciona esta linha
   onUseAzureOpenaiChange: (value: boolean) => void
 }
 
@@ -41,9 +39,7 @@ export const APIStep: FC<APIStepProps> = ({
   openaiOrgID,
   azureOpenaiAPIKey,
   azureOpenaiEndpoint,
-  azureOpenai35TurboID,
-  azureOpenai45TurboID,
-  azureOpenai45VisionID,
+  azureOpenai4OID,
   azureOpenaiEmbeddingsID,
   anthropicAPIKey,
   googleGeminiAPIKey,
@@ -51,20 +47,20 @@ export const APIStep: FC<APIStepProps> = ({
   groqAPIKey,
   perplexityAPIKey,
   openrouterAPIKey,
+  flowiseAPIKey, // Adiciona esta linha
   useAzureOpenai,
   onOpenaiAPIKeyChange,
   onOpenaiOrgIDChange,
   onAzureOpenaiAPIKeyChange,
   onAzureOpenaiEndpointChange,
-  onAzureOpenai35TurboIDChange,
-  onAzureOpenai45TurboIDChange,
-  onAzureOpenai45VisionIDChange,
+  onAzureOpenai4OIDChange,
   onAzureOpenaiEmbeddingsIDChange,
   onAnthropicAPIKeyChange,
   onGoogleGeminiAPIKeyChange,
   onMistralAPIKeyChange,
   onGroqAPIKeyChange,
   onPerplexityAPIKeyChange,
+  onFlowiseAPIKeyChange, // Adiciona esta linha
   onUseAzureOpenaiChange,
   onOpenrouterAPIKeyChange
 }) => {
@@ -115,35 +111,13 @@ export const APIStep: FC<APIStepProps> = ({
             </div>
 
             <div className="space-y-1">
-              <Label>Azure OpenAI GPT-3.5 Turbo ID</Label>
+              <Label>Azure OpenAI GPT-4 O ID</Label>
 
               <Input
-                placeholder="Azure OpenAI GPT-3.5 Turbo ID"
+                placeholder="Azure OpenAI GPT-4 O ID"
                 type="password"
-                value={azureOpenai35TurboID}
-                onChange={e => onAzureOpenai35TurboIDChange(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-1">
-              <Label>Azure OpenAI GPT-4.5 Turbo ID</Label>
-
-              <Input
-                placeholder="Azure OpenAI GPT-4.5 Turbo ID"
-                type="password"
-                value={azureOpenai45TurboID}
-                onChange={e => onAzureOpenai45TurboIDChange(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-1">
-              <Label>Azure OpenAI GPT-4.5 Vision ID</Label>
-
-              <Input
-                placeholder="Azure OpenAI GPT-4.5 Vision ID"
-                type="password"
-                value={azureOpenai45VisionID}
-                onChange={e => onAzureOpenai45VisionIDChange(e.target.value)}
+                value={azureOpenai4OID}
+                onChange={e => onAzureOpenai4OIDChange(e.target.value)}
               />
             </div>
 
@@ -228,6 +202,7 @@ export const APIStep: FC<APIStepProps> = ({
           onChange={e => onPerplexityAPIKeyChange(e.target.value)}
         />
       </div>
+
       <div className="space-y-1">
         <Label>OpenRouter API Key</Label>
 
@@ -236,6 +211,16 @@ export const APIStep: FC<APIStepProps> = ({
           type="password"
           value={openrouterAPIKey}
           onChange={e => onOpenrouterAPIKeyChange(e.target.value)}
+        />
+      </div>
+
+      <div className="space-y-1">
+        <Label>Flowise API Key</Label> {/* Adiciona esta linha */}
+        <Input
+          placeholder="Flowise API Key"
+          type="password"
+          value={flowiseAPIKey}
+          onChange={e => onFlowiseAPIKeyChange(e.target.value)}
         />
       </div>
     </>
